@@ -16,3 +16,4 @@ use App\Http\Middleware\CheckSession;
 Route::get('/', 'BasicController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts/{post}', 'HomeController@about');

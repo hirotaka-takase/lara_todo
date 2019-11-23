@@ -28,7 +28,7 @@ class LoginCheckProvider extends ServiceProvider
         View::composer('layouts.app',function($view) {
             $loginUser = \Auth::user();
             if($loginUser) {
-              $view->with('loginUser',$loginUser->name);
+              $view->with('loginUser',strtoupper($loginUser->name));
             } else {
               $view->with('loginUser','Everybody');
             }
