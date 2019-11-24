@@ -31,17 +31,49 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::where('name',Auth::user()->name)->first();
-        $name = $user->name;
         $posts = Post::where('user_id',Auth::user()->id)->latest()->get();
 
         $login_user = [
-          'name' => $name,
+          'user' => $user,
           'posts' => $posts
         ];
         return view('home',['login_user' => $login_user]);
     }
 
+    /* 詳細ページ表示 */
     public function about(Post $post) {
       return view('about',['post' => $post]);
+    }
+
+    public function store(Request $request) {
+      $post = new Post;
+      $form = $request->all();
+      unset($form['_token']);
+      $post->fill($form)->save();
+      return redirect('home');
+    }
+
+    public function edit(Post $post) {
+      $user = User::where('name',Auth::user()->name)->first();
+
+      $login_user = [
+        'user' => $user,
+        'post' => $post
+      ];
+      return view('edit',['login_user' => $login_user]);
+    }
+
+    public function update(Post $post) {
+      $post->user_id = request('user_id');
+      $post->title = request('title');
+      $post->body= request('body');
+      $post->save();
+
+      return view('about',['post' => $post]);
+    }
+
+    public function delete(Post $post) {
+      \App\Post::where('id',$post->id)->delete();
+      return redirect('home');
     }
 }
