@@ -1,5 +1,18 @@
 .main_container {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.main_container_link {
+  display: flex;
+  justify-content: center;
+}
+
+div.card {
+  box-shadow: 0px 6px 10px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0px 6px 10px rgba(0,0,0,0.10);
+  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.10);
 }

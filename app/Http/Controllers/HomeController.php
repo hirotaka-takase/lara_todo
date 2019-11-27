@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\BasicRequest;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -31,7 +32,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = User::where('name',Auth::user()->name)->first();
-        $posts = Post::where('user_id',Auth::user()->id)->latest()->get();
+        $posts = Post::where('user_id',Auth::user()->id)->latest()->Paginate(4);
 
         $login_user = [
           'user' => $user,
@@ -45,7 +46,7 @@ class HomeController extends Controller
       return view('about',['post' => $post]);
     }
 
-    public function store(Request $request) {
+    public function store(BasicRequest $request) {
       $post = new Post;
       $form = $request->all();
       unset($form['_token']);

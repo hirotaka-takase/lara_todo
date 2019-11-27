@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="h2 text-center mb-5 text-white">{{ $login_user['user']->name."'s TO DO" }}</h2>
+<h2 class="h2 text-center mb-5"><a href="{{url('home')}}" class="text-white">{{ $login_user['user']->name."'s TO DO" }}</a></h2>
 <form class="mb-5 text-center" method="post" action="/posts/{{$login_user['post']->id}}" >
   @csrf
   @method('put')
