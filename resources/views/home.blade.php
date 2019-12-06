@@ -2,7 +2,6 @@
 
 @section('content')
 <h2 class="h2 text-center mb-5"><a href="{{url('home')}}" class="text-white">{{ $login_user['user']->name."'s TO DO" }}</a></h2>
-@if(url()->full() == 'http://192.168.58.3/home?page=1' or url()->full() == 'http://192.168.58.3/home')
 <form class="mb-5 text-center" method="post" action="{{url('/home')}}" >
   @csrf
   <input type="hidden" name="user_id" value="{{$login_user['user']->id}}"  />
@@ -20,7 +19,6 @@
   </div>
   <button type="submit" class="btn btn-outline-success w-25 p-2">Add</button>
 </form>
-@endif
 @if(!count($login_user['posts']) == 0)
   <div class="main_container mb-3" id="list_todo">
     @foreach($login_user['posts'] as $post)
